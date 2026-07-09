@@ -726,6 +726,61 @@ textarea {
   background: rgba(17,24,39,.04) !important;
 }
 
+
+/* v2.2.1 Compact overscroll fix */
+html,
+body {
+  background-color: var(--theme-bg) !important;
+  min-height: 100svh !important;
+  overflow-x: hidden !important;
+}
+
+body {
+  position: relative;
+}
+
+.app {
+  min-height: calc(100svh - 56px - var(--safe-bottom)) !important;
+  padding-bottom: calc(18px + var(--safe-bottom)) !important;
+}
+
+:root[data-size="compact"] .app {
+  min-height: calc(100svh - 44px - var(--safe-bottom)) !important;
+  padding-bottom: calc(26px + var(--safe-bottom)) !important;
+}
+
+:root[data-size="compact"] body {
+  padding-bottom: calc(72px + var(--safe-bottom)) !important;
+}
+
+:root[data-size="standard"] body,
+:root[data-size="comfortable"] body,
+:root[data-size="large"] body {
+  padding-bottom: calc(66px + var(--safe-bottom)) !important;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: -80px;
+  height: 160px;
+  background: linear-gradient(180deg, var(--theme-bg2), var(--theme-bg2)) !important;
+  z-index: -2;
+  pointer-events: none;
+}
+
+@supports not (height: 100svh) {
+  .app {
+    min-height: calc(100vh - 56px - var(--safe-bottom)) !important;
+  }
+
+  :root[data-size="compact"] .app {
+    min-height: calc(100vh - 44px - var(--safe-bottom)) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1289,9 +1344,9 @@ function renderSettings() {
     <button class="settings-row" onclick="updateAppCache()"><span>Update App Cache</span><span>Refresh</span></button>
 
     <div class="section-title"><span>About</span></div>
-    <div class="settings-row"><span>Version</span><span>2.2.0</span></div>
-    <div class="settings-row"><span>Release</span><span>Themes and Size</span></div>
-    <div class="settings-row"><span>Build</span><span>20260709-2355</span></div>
+    <div class="settings-row"><span>Version</span><span>2.2.1</span></div>
+    <div class="settings-row"><span>Release</span><span>Compact Overscroll Fix</span></div>
+    <div class="settings-row"><span>Build</span><span>20260710-0010</span></div>
   `;
 }
 
