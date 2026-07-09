@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0d12" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Tally Journal" />
+  <link rel="manifest" href="manifest.json" />
+  <title>Tally Journal</title>
+  <style>
+:root {
+  --bg: #0b0d12;
+  --panel: rgba(255,255,255,.075);
+  --panel-strong: rgba(255,255,255,.11);
+  --line: rgba(255,255,255,.13);
+  --text: #f5f7fb;
+  --muted: rgba(245,247,251,.62);
+  --gold: #d7b56d;
+  --danger: #ff6b6b;
+  --success: #61d394;
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  background:
+    radial-gradient(circle at top left, rgba(215,181,109,.16), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(110,168,255,.12), transparent 28rem),
+    linear-gradient(180deg, var(--bg), #11141c);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+body {
+  padding-bottom: calc(66px + var(--safe-bottom));
+}
+
+button, input, textarea {
+  font: inherit;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 9px 12px;
+  font-weight: 750;
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+
+button:active {
+  transform: scale(.98);
+}
+
+.primary {
+  color: #15120b;
+  background: linear-gradient(135deg, #f4dc9f, #caa45f);
+  border: 0;
+}
+
+.danger {
+  color: white;
+  background: rgba(255,107,107,.2);
+  border: 1px solid rgba(255,107,107,.35);
+}
+
+.success {
+  color: #06120c;
+  background: linear-gradient(135deg, #a7f3c5, #45d383);
+  border: 0;
+}
+
+.app {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: calc(10px + var(--safe-top)) 10px 18px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.eyebrow {
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 26px;
+  letter-spacing: -.045em;
+  line-height: 1;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+  margin-top: 5px;
+}
+
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  padding: 0;
+}
+
+.segment {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  padding: 4px;
+  margin: 8px 0;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.055);
+  border-radius: 15px;
+}
+
+.segment button {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  padding: 7px 9px;
+  border-radius: 11px;
+}
+
+.segment button.active {
+  color: #15120b;
+  background: linear-gradient(135deg, #f4dc9f, #caa45f);
+}
+
+.search {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.075);
+  color: var(--text);
+  border-radius: 15px;
+  padding: 9px 12px;
+  margin: 8px 0 10px;
+  outline: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+  margin-bottom: 9px;
+}
+
+.stat {
+  min-height: 44px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.065);
+  padding: 7px 9px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.stat span {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.list {
+  display: grid;
+  gap: 7px;
+}
+
+.counter {
+  min-height: 72px;
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(140deg, var(--panel-strong), var(--panel));
+  position: relative;
+  overflow: hidden;
+}
+
+.counter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, var(--accent), transparent 58%);
+  opacity: .16;
+  pointer-events: none;
+}
+
+.counter > * {
+  position: relative;
+}
+
+.emoji {
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--line);
+  font-size: 20px;
+}
+
+.counter h2 {
+  margin: 0 0 3px;
+  font-size: 16px;
+  line-height: 1.05;
+}
+
+.counter p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.count {
+  font-size: 34px;
+  font-weight: 950;
+  letter-spacing: -.08em;
+}
+
+.empty {
+  padding: 22px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 15px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+
+.detail-card {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(140deg, var(--panel-strong), var(--panel));
+  padding: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, var(--accent), transparent 58%);
+  opacity: .16;
+  pointer-events: none;
+}
+
+.detail-top {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+.detail-top h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.detail-count {
+  font-size: 40px;
+  font-weight: 950;
+  letter-spacing: -.08em;
+}
+
+.detail-sub {
+  position: relative;
+  color: var(--muted);
+  font-size: 11px;
+  margin: 3px 0 9px 46px;
+}
+
+.actions {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.actions .wide {
+  width: 100%;
+  justify-content: center;
+  padding: 11px 12px;
+  font-size: 15px;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 3px 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255,255,255,.065);
+  padding: 9px 10px;
+}
+
+.entry strong {
+  font-size: 13px;
+}
+
+.entry p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  white-space: pre-wrap;
+  font-size: 12px;
+}
+
+.settings-group {
+  margin-top: 12px;
+}
+
+.settings-row {
+  min-height: 38px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255,255,255,.065);
+  padding: 9px 10px;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.settings-row span:last-child {
+  color: var(--muted);
+}
+
+.tabbar {
+  position: fixed;
+  z-index: 50;
+  left: 50%;
+  bottom: calc(6px + var(--safe-bottom));
+  transform: translateX(-50%);
+  width: min(92vw, 520px);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 5px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(20,22,30,.86);
+  backdrop-filter: blur(18px);
+}
+
+.tab {
+  display: grid;
+  gap: 1px;
+  place-items: center;
+  padding: 6px 2px;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.tab span {
+  font-size: 11px;
+}
+
+.tab.active {
+  color: #15120b;
+  background: linear-gradient(135deg, #f4dc9f, #caa45f);
+}
+
+dialog {
+  width: min(92vw, 390px);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 0;
+  background: #171a22;
+  color: var(--text);
+  box-shadow: 0 30px 80px rgba(0,0,0,.55);
+}
+
+dialog::backdrop {
+  background: rgba(0,0,0,.58);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  padding: 12px;
+}
+
+.modal h2 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  margin: 8px 0 4px;
+}
+
+input, textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255,255,255,.08);
+  color: var(--text);
+  border-radius: 13px;
+  padding: 9px 10px;
+  outline: 0;
+}
+
+textarea {
+  min-height: 64px;
+}
+
+.modal-grid {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  gap: 8px;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 6px;
+}
+
+.swatch {
+  height: 26px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+}
+
+.swatch.active {
+  border-color: white;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+  </style>
+</head>
+<body>
+  <div id="app" class="app"></div>
+
+  <nav class="tabbar">
+    <button class="tab active" data-screen="home">⌂<span>Home</span></button>
+    <button class="tab" data-screen="journal">☷<span>Journal</span></button>
+    <button class="tab" data-screen="settings">⚙<span>Settings</span></button>
+  </nav>
+
+  <input id="importFile" type="file" accept="application/json" hidden />
+
+  <script>
+const TJ_STORAGE_KEY = "tally-journal-v2";
+
+function loadState() {
+  try {
+    const state = JSON.parse(localStorage.getItem(TJ_STORAGE_KEY));
+    if (state && Array.isArray(state.counters)) return state;
+  } catch {}
+  return { version: "2.0.0", counters: [], settings: { language: "en", theme: "midnight-gold" } };
+}
+
+function saveState(state) {
+  localStorage.setItem(TJ_STORAGE_KEY, JSON.stringify(state));
+}
+
+function uid() {
+  return Date.now().toString(36) + Math.random().toString(36).slice(2);
+}
+
+
+function exportJson(state) {
+  const blob = new Blob([JSON.stringify({
+    version: "2.0.0",
+    appName: "Tally Journal",
+    exportedAt: new Date().toISOString(),
+    counters: state.counters,
+    settings: state.settings
+  }, null, 2)], { type: "application/json" });
+
+  downloadBlob(blob, "tally-journal-backup.json");
+}
+
+function exportCsv(counters) {
+  const rows = [["Counter", "Status", "Emoji", "Date and Time", "Note"]];
+  counters.forEach(counter => {
+    (counter.entries || []).forEach(entry => {
+      rows.push([
+        counter.name,
+        counter.archived ? "Archived" : "Active",
+        counter.emoji || "",
+        formatDate(entry.dateTime),
+        entry.note || ""
+      ]);
+    });
+  });
+
+  const csv = rows.map(row => row.map(v => `"${String(v).replaceAll('"', '""')}"`).join(";")).join("\n");
+  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), "tally-journal-export.csv");
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+function importJsonFile(file, state, onDone) {
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    try {
+      const data = JSON.parse(reader.result);
+      const importedCounters = Array.isArray(data) ? data : data.counters;
+
+      if (!Array.isArray(importedCounters)) throw new Error("No counters found");
+
+      const add = confirm("Import JSON backup?\n\nOK = Add imported counters.\nCancel = Replace current data.");
+      const counters = importedCounters.map(normalizeCounter);
+
+      if (add) {
+        const ids = new Set(state.counters.map(c => c.id));
+        counters.forEach(counter => {
+          if (ids.has(counter.id)) counter.id = uid();
+          state.counters.push(counter);
+        });
+      } else {
+        if (!confirm("Replace all current data?")) return;
+        state.counters = counters;
+      }
+
+      saveState(state);
+      alert("Import completed.");
+      onDone();
+    } catch {
+      alert("Import failed. This file could not be read.");
+    }
+  };
+
+  reader.readAsText(file);
+}
+
+function normalizeCounter(counter) {
+  return {
+    id: counter.id || uid(),
+    name: counter.name || "Imported Counter",
+    emoji: counter.emoji || "📌",
+    color: counter.color || "#d7b56d",
+    archived: !!counter.archived,
+    createdAt: counter.createdAt || new Date().toISOString(),
+    entries: (counter.entries || []).map(entry => ({
+      id: entry.id || uid(),
+      dateTime: entry.dateTime || new Date().toISOString(),
+      note: entry.note || ""
+    })).sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime))
+  };
+}
+
+
+const app = document.getElementById("app");
+const importFile = document.getElementById("importFile");
+
+let state = loadState();
+let screen = "home";
+let mode = "active";
+let selectedCounterId = null;
+let selectedColor = "#d7b56d";
+
+const colors = ["#d7b56d", "#6ea8ff", "#61d394", "#ff8fab", "#c084fc", "#fb923c", "#22d3ee", "#a3e635", "#f87171", "#facc15", "#94a3b8", "#f5f7fb"];
+
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    screen = btn.dataset.screen;
+    selectedCounterId = null;
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    render();
+  });
+});
+
+importFile.addEventListener("change", event => {
+  const file = event.target.files[0];
+  event.target.value = "";
+  if (!file) return;
+  importJsonFile(file, state, render);
+});
+
+function render() {
+  if (selectedCounterId) return renderDetail(selectedCounterId);
+  if (screen === "settings") return renderSettings();
+  if (screen === "journal") return renderJournal();
+  return renderHome();
+}
+
+function renderHeader(title, subtitle, action = "") {
+  return `
+    <div class="header">
+      <div>
+        <div class="eyebrow">Private counter journal</div>
+        <h1>${title}</h1>
+        <div class="subtitle">${subtitle}</div>
+      </div>
+      ${action}
+    </div>
+  `;
+}
+
+function todayKey(date = new Date()) {
+  return new Intl.DateTimeFormat("sv-SE", { timeZone: "Europe/Amsterdam", dateStyle: "short" }).format(new Date(date));
+}
+
+function formatDate(value) {
+  const date = new Date(value);
+  return new Intl.DateTimeFormat("en-GB", { day: "2-digit", month: "short", year: "numeric" }).format(date) + " • " +
+         new Intl.DateTimeFormat("en-GB", { timeStyle: "short" }).format(date);
+}
+
+function lastText(counter) {
+  const entry = counter.entries?.[0];
+  return entry ? formatDate(entry.dateTime) : "No entries yet";
+}
+
+function sortedCounters() {
+  return [...state.counters].sort((a, b) => {
+    const aTime = a.entries?.[0]?.dateTime || a.createdAt || 0;
+    const bTime = b.entries?.[0]?.dateTime || b.createdAt || 0;
+    return new Date(bTime) - new Date(aTime);
+  });
+}
+
+function renderHome() {
+  const shown = state.counters.filter(c => mode === "archived" ? c.archived : !c.archived);
+  const entries = shown.flatMap(c => c.entries || []);
+  const today = todayKey();
+
+  app.innerHTML = `
+    ${renderHeader("Tally Journal", "Track anything. Every tap becomes a dated journal entry.", `<button class="icon-btn primary" onclick="openCounterDialog()">+</button>`)}
+    <div class="segment">
+      <button class="${mode === "active" ? "active" : ""}" onclick="mode='active';render()">Active</button>
+      <button class="${mode === "archived" ? "active" : ""}" onclick="mode='archived';render()">Archive</button>
+    </div>
+    <input class="search" id="search" placeholder="Search counters..." oninput="renderCounters()" />
+    <div class="stats">
+      <div class="stat"><strong>${shown.length}</strong><span>${mode === "archived" ? "Archived" : "Active"}</span></div>
+      <div class="stat"><strong>${entries.length}</strong><span>Entries</span></div>
+      <div class="stat"><strong>${entries.filter(e => todayKey(e.dateTime) === today).length}</strong><span>Today</span></div>
+    </div>
+    <div id="counterList" class="list"></div>
+  `;
+
+  renderCounters();
+}
+
+function renderCounters() {
+  const list = document.getElementById("counterList");
+  if (!list) return;
+
+  const q = document.getElementById("search")?.value?.toLowerCase() || "";
+  const counters = sortedCounters().filter(c =>
+    (mode === "archived" ? c.archived : !c.archived) &&
+    c.name.toLowerCase().includes(q)
+  );
+
+  if (!counters.length) {
+    list.innerHTML = `<div class="empty">${mode === "archived" ? "No archived counters." : "No active counters."}</div>`;
+    return;
+  }
+
+  list.innerHTML = counters.map(counter => `
+    <div class="counter" style="--accent:${counter.color || "#d7b56d"}" onclick="selectedCounterId='${counter.id}';render()">
+      <div class="emoji">${escapeHtml(counter.emoji || "📌")}</div>
+      <div>
+        <h2>${escapeHtml(counter.name)}</h2>
+        <p>${lastText(counter)}</p>
+      </div>
+      <div class="count">${(counter.entries || []).length}</div>
+    </div>
+  `).join("");
+}
+
+function renderDetail(counterId) {
+  const counter = state.counters.find(c => c.id === counterId);
+  if (!counter) {
+    selectedCounterId = null;
+    return render();
+  }
+
+  app.innerHTML = `
+    <div class="header">
+      <button onclick="selectedCounterId=null;render()">← Back</button>
+      <button onclick="openCounterMenu('${counter.id}')">•••</button>
+    </div>
+
+    <div class="detail-card" style="--accent:${counter.color || "#d7b56d"}">
+      <div class="detail-top">
+        <div class="emoji">${escapeHtml(counter.emoji || "📌")}</div>
+        <h2>${escapeHtml(counter.name)}</h2>
+        <div class="detail-count">${(counter.entries || []).length}</div>
+      </div>
+      <div class="detail-sub">${lastText(counter)}</div>
+      <div class="actions">
+        ${counter.archived ? `<button class="wide success" onclick="restoreCounter('${counter.id}')">Restore Counter</button>` : `
+          <button class="wide primary" onclick="openEntryDialog('${counter.id}')">+ Add Entry</button>
+          <button onclick="openEntryDialog('${counter.id}', true)">Add Old Entry</button>
+          <button onclick="exportCsv([getCounter('${counter.id}')])">Export</button>
+        `}
+      </div>
+    </div>
+
+    <div class="section-title"><span>Timeline</span><span>${(counter.entries || []).length} entries</span></div>
+    <div class="list">
+      ${(counter.entries || []).length ? counter.entries.map(entry => `
+        <div class="entry">
+          <div onclick="openEntryDialog('${counter.id}', false, '${entry.id}')">
+            <strong>${formatDate(entry.dateTime)}</strong>
+            <p>${entry.note ? escapeHtml(entry.note) : "No note"}</p>
+          </div>
+          ${counter.archived ? "" : `<button class="danger" onclick="deleteEntry('${counter.id}', '${entry.id}')">×</button>`}
+        </div>
+      `).join("") : `<div class="empty">No entries yet.</div>`}
+    </div>
+  `;
+}
+
+function renderJournal() {
+  const rows = state.counters
+    .filter(c => !c.archived)
+    .flatMap(c => (c.entries || []).map(e => ({ counter: c, entry: e })))
+    .sort((a, b) => new Date(b.entry.dateTime) - new Date(a.entry.dateTime));
+
+  app.innerHTML = `
+    ${renderHeader("Journal", "A timeline of your latest entries across all active counters.")}
+    <div class="list">
+      ${rows.length ? rows.slice(0, 100).map(({counter, entry}) => `
+        <div class="entry" onclick="selectedCounterId='${counter.id}';render()">
+          <div>
+            <strong>${escapeHtml(counter.emoji || "📌")} ${escapeHtml(counter.name)} · ${formatDate(entry.dateTime)}</strong>
+            <p>${entry.note ? escapeHtml(entry.note) : "No note"}</p>
+          </div>
+        </div>
+      `).join("") : `<div class="empty">No journal entries yet.</div>`}
+    </div>
+  `;
+}
+
+function renderSettings() {
+  app.innerHTML = `
+    ${renderHeader("Settings", "Small for now. More options will come later.")}
+    <div class="section-title"><span>General</span></div>
+    <div class="settings-row"><span>Language</span><span>English</span></div>
+    <div class="settings-row"><span>Theme</span><span>Midnight Gold</span></div>
+
+    <div class="section-title"><span>Data</span></div>
+    <button class="settings-row" onclick="importFile.click()"><span>Import JSON</span><span>Choose file</span></button>
+    <button class="settings-row" onclick="exportJson(state)"><span>Export Backup</span><span>JSON</span></button>
+    <button class="settings-row" onclick="exportCsv(state.counters)"><span>Export CSV</span><span>Spreadsheet</span></button>
+
+    <div class="section-title"><span>About</span></div>
+    <div class="settings-row"><span>Version</span><span>2.0.0</span></div>
+    <div class="settings-row"><span>Build</span><span>20260709-2200</span></div>
+  `;
+}
+
+function getCounter(id) {
+  return state.counters.find(c => c.id === id);
+}
+
+function openCounterDialog(id = null) {
+  const counter = id ? getCounter(id) : null;
+  selectedColor = counter?.color || "#d7b56d";
+
+  const dialog = document.createElement("dialog");
+  dialog.innerHTML = `
+    <form class="modal" method="dialog">
+      <h2>${counter ? "Edit Counter" : "New Counter"}</h2>
+      <div class="modal-grid">
+        <div>
+          <label>Emoji</label>
+          <input id="counterEmoji" maxlength="2" value="${escapeHtml(counter?.emoji || "📌")}" />
+        </div>
+        <div>
+          <label>Name</label>
+          <input id="counterName" value="${escapeHtml(counter?.name || "")}" placeholder="Counter name" />
+        </div>
+      </div>
+      <label>Color</label>
+      <div class="swatches">
+        ${colors.map(color => `<button type="button" class="swatch ${color === selectedColor ? "active" : ""}" style="background:${color}" onclick="selectColor('${color}', this)"></button>`).join("")}
+      </div>
+      <div class="modal-actions">
+        <button type="button" onclick="this.closest('dialog').remove()">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  `;
+
+  dialog.querySelector("form").addEventListener("submit", event => {
+    event.preventDefault();
+    const name = dialog.querySelector("#counterName").value.trim();
+    const emoji = dialog.querySelector("#counterEmoji").value.trim() || "📌";
+    if (!name) return;
+
+    if (counter) {
+      counter.name = name;
+      counter.emoji = emoji;
+      counter.color = selectedColor;
+    } else {
+      state.counters.push({
+        id: uid(),
+        name,
+        emoji,
+        color: selectedColor,
+        archived: false,
+        createdAt: new Date().toISOString(),
+        entries: []
+      });
+    }
+
+    saveState(state);
+    dialog.remove();
+    render();
+  });
+
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
+
+function selectColor(color, element) {
+  selectedColor = color;
+  document.querySelectorAll(".swatch").forEach(s => s.classList.remove("active"));
+  element.classList.add("active");
+}
+
+function openEntryDialog(counterId, old = false, entryId = null) {
+  const counter = getCounter(counterId);
+  const entry = entryId ? counter.entries.find(e => e.id === entryId) : null;
+  const dialog = document.createElement("dialog");
+
+  dialog.innerHTML = `
+    <form class="modal" method="dialog">
+      <h2>${entry ? "Edit Entry" : "New Entry"}</h2>
+      <label>Date and time</label>
+      <input id="entryDateTime" type="datetime-local" value="${entry ? toLocalInput(entry.dateTime) : old ? "" : toLocalInput(new Date().toISOString())}" required />
+      <label>Note</label>
+      <textarea id="entryNote" placeholder="Optional">${escapeHtml(entry?.note || "")}</textarea>
+      <div class="modal-actions">
+        <button type="button" onclick="this.closest('dialog').remove()">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  `;
+
+  dialog.querySelector("form").addEventListener("submit", event => {
+    event.preventDefault();
+    const dateTime = dialog.querySelector("#entryDateTime").value;
+    const note = dialog.querySelector("#entryNote").value.trim();
+
+    if (entry) {
+      entry.dateTime = new Date(dateTime).toISOString();
+      entry.note = note;
+    } else {
+      counter.entries.push({ id: uid(), dateTime: new Date(dateTime).toISOString(), note });
+    }
+
+    counter.entries.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+    saveState(state);
+    dialog.remove();
+    render();
+  });
+
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
+
+function toLocalInput(value) {
+  const date = new Date(value);
+  const pad = n => String(n).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`;
+}
+
+function openCounterMenu(counterId) {
+  const counter = getCounter(counterId);
+  const dialog = document.createElement("dialog");
+
+  dialog.innerHTML = `
+    <div class="modal">
+      <h2>${escapeHtml(counter.name)}</h2>
+      <div class="list">
+        ${counter.archived ? `
+          <button class="success" onclick="restoreCounter('${counter.id}'); this.closest('dialog').remove()">Restore</button>
+          <button class="danger" onclick="deleteCounter('${counter.id}'); this.closest('dialog').remove()">Delete Permanently</button>
+        ` : `
+          <button onclick="this.closest('dialog').remove(); openCounterDialog('${counter.id}')">Edit</button>
+          <button onclick="archiveCounter('${counter.id}'); this.closest('dialog').remove()">Archive</button>
+          <button class="danger" onclick="deleteCounter('${counter.id}'); this.closest('dialog').remove()">Delete</button>
+        `}
+      </div>
+      <div class="modal-actions">
+        <button onclick="this.closest('dialog').remove()">Close</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
+
+function archiveCounter(counterId) {
+  const counter = getCounter(counterId);
+  if (!confirm(`Archive "${counter.name}"?`)) return;
+  counter.archived = true;
+  selectedCounterId = null;
+  saveState(state);
+  render();
+}
+
+function restoreCounter(counterId) {
+  const counter = getCounter(counterId);
+  counter.archived = false;
+  selectedCounterId = null;
+  saveState(state);
+  render();
+}
+
+function deleteCounter(counterId) {
+  const counter = getCounter(counterId);
+  if (!confirm(`Delete "${counter.name}"? This cannot be undone.`)) return;
+  state.counters = state.counters.filter(c => c.id !== counterId);
+  selectedCounterId = null;
+  saveState(state);
+  render();
+}
+
+function deleteEntry(counterId, entryId) {
+  const counter = getCounter(counterId);
+  if (!confirm("Delete this entry?")) return;
+  counter.entries = counter.entries.filter(e => e.id !== entryId);
+  saveState(state);
+  render();
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => navigator.serviceWorker.register("service-worker.js").catch(() => {}));
+}
+
+render();
+
+  </script>
+</body>
+</html>
