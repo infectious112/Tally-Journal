@@ -497,6 +497,49 @@ textarea {
   border: 1px solid rgba(255,107,107,.35);
 }
 
+
+/* v2.1.1 iOS overscroll fix */
+html {
+  background: #0b0d12 !important;
+  min-height: 100%;
+  overscroll-behavior-y: none;
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(215,181,109,.16), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(110,168,255,.12), transparent 28rem),
+    linear-gradient(180deg, #0b0d12, #11141c) !important;
+  min-height: 100svh;
+  overscroll-behavior-y: none;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(circle at top left, rgba(215,181,109,.16), transparent 32rem),
+    radial-gradient(circle at bottom right, rgba(110,168,255,.12), transparent 28rem),
+    linear-gradient(180deg, #0b0d12, #11141c);
+  pointer-events: none;
+}
+
+.app {
+  min-height: calc(100svh - 82px - var(--safe-bottom));
+}
+
+@supports not (height: 100svh) {
+  body {
+    min-height: 100vh;
+  }
+
+  .app {
+    min-height: calc(100vh - 82px - var(--safe-bottom));
+  }
+}
+
 </style>
 </head>
 <body>
@@ -977,9 +1020,9 @@ function renderSettings() {
     <button class="settings-row" onclick="updateAppCache()"><span>Update App Cache</span><span>Refresh</span></button>
 
     <div class="section-title"><span>About</span></div>
-    <div class="settings-row"><span>Version</span><span>2.1.0</span></div>
-    <div class="settings-row"><span>Release</span><span>Privacy Foundation</span></div>
-    <div class="settings-row"><span>Build</span><span>20260709-2300</span></div>
+    <div class="settings-row"><span>Version</span><span>2.1.1</span></div>
+    <div class="settings-row"><span>Release</span><span>Overscroll Fix</span></div>
+    <div class="settings-row"><span>Build</span><span>20260709-2335</span></div>
   `;
 }
 
