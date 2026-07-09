@@ -540,6 +540,192 @@ body::after {
   }
 }
 
+
+/* v2.2 Theme and Interface Size */
+:root {
+  --scale: 1;
+  --theme-bg: #0b0d12;
+  --theme-bg2: #11141c;
+  --theme-panel: rgba(255,255,255,.075);
+  --theme-panel-strong: rgba(255,255,255,.11);
+  --theme-line: rgba(255,255,255,.13);
+  --theme-text: #f5f7fb;
+  --theme-muted: rgba(245,247,251,.62);
+  --theme-accent: #d7b56d;
+  --theme-accent2: #caa45f;
+  --theme-glow-a: rgba(215,181,109,.16);
+  --theme-glow-b: rgba(110,168,255,.12);
+}
+
+:root[data-size="compact"] { --scale: .88; }
+:root[data-size="standard"] { --scale: 1; }
+:root[data-size="comfortable"] { --scale: 1.10; }
+:root[data-size="large"] { --scale: 1.20; }
+
+:root[data-theme="emerald-elite"] {
+  --theme-bg: #06100d;
+  --theme-bg2: #0b1712;
+  --theme-panel: rgba(232,255,245,.07);
+  --theme-panel-strong: rgba(232,255,245,.115);
+  --theme-line: rgba(173,255,214,.16);
+  --theme-text: #f2fff8;
+  --theme-muted: rgba(242,255,248,.62);
+  --theme-accent: #35d07f;
+  --theme-accent2: #0f9f5b;
+  --theme-glow-a: rgba(53,208,127,.22);
+  --theme-glow-b: rgba(14,124,78,.16);
+}
+
+:root[data-theme="arctic-white"] {
+  --theme-bg: #f4f6f8;
+  --theme-bg2: #e9edf2;
+  --theme-panel: rgba(255,255,255,.72);
+  --theme-panel-strong: rgba(255,255,255,.92);
+  --theme-line: rgba(20,25,35,.12);
+  --theme-text: #111827;
+  --theme-muted: rgba(17,24,39,.58);
+  --theme-accent: #c59b4a;
+  --theme-accent2: #a47c32;
+  --theme-glow-a: rgba(197,155,74,.16);
+  --theme-glow-b: rgba(80,120,180,.12);
+}
+
+:root {
+  --bg: var(--theme-bg);
+  --panel: var(--theme-panel);
+  --panel-strong: var(--theme-panel-strong);
+  --line: var(--theme-line);
+  --text: var(--theme-text);
+  --muted: var(--theme-muted);
+  --gold: var(--theme-accent);
+}
+
+html, body, body::after {
+  background:
+    radial-gradient(circle at top left, var(--theme-glow-a), transparent 32rem),
+    radial-gradient(circle at bottom right, var(--theme-glow-b), transparent 28rem),
+    linear-gradient(180deg, var(--theme-bg), var(--theme-bg2)) !important;
+}
+
+.primary,
+.segment button.active,
+.tab.active {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--theme-accent) 80%, white), var(--theme-accent2)) !important;
+  color: #07120c !important;
+}
+
+:root[data-theme="arctic-white"] .primary,
+:root[data-theme="arctic-white"] .segment button.active,
+:root[data-theme="arctic-white"] .tab.active {
+  color: #111827 !important;
+}
+
+.tabbar {
+  background: color-mix(in srgb, var(--theme-bg2) 86%, transparent) !important;
+}
+
+.detail-card,
+.counter {
+  background: linear-gradient(140deg, var(--theme-panel-strong), var(--theme-panel)) !important;
+}
+
+.app {
+  padding-left: calc(10px * var(--scale)) !important;
+  padding-right: calc(10px * var(--scale)) !important;
+}
+
+h1 { font-size: calc(26px * var(--scale)) !important; }
+.subtitle { font-size: calc(12px * var(--scale)) !important; }
+.eyebrow { font-size: calc(10px * var(--scale)) !important; }
+
+.counter {
+  min-height: calc(72px * var(--scale)) !important;
+  padding: calc(10px * var(--scale)) calc(12px * var(--scale)) !important;
+  gap: calc(10px * var(--scale)) !important;
+}
+
+.emoji {
+  width: calc(36px * var(--scale)) !important;
+  height: calc(36px * var(--scale)) !important;
+  font-size: calc(20px * var(--scale)) !important;
+}
+
+.counter h2 {
+  font-size: calc(16px * var(--scale)) !important;
+}
+
+.counter p {
+  font-size: calc(11px * var(--scale)) !important;
+}
+
+.count {
+  font-size: calc(34px * var(--scale)) !important;
+}
+
+.stat {
+  min-height: calc(44px * var(--scale)) !important;
+  padding: calc(7px * var(--scale)) calc(9px * var(--scale)) !important;
+}
+
+.stat strong {
+  font-size: calc(17px * var(--scale)) !important;
+}
+
+.stat span {
+  font-size: calc(10px * var(--scale)) !important;
+}
+
+.search,
+.settings-row,
+.entry,
+button,
+input,
+textarea {
+  font-size: calc(13px * var(--scale)) !important;
+}
+
+.detail-card {
+  padding: calc(12px * var(--scale)) !important;
+}
+
+.detail-top {
+  grid-template-columns: calc(36px * var(--scale)) 1fr auto !important;
+}
+
+.detail-top h2 {
+  font-size: calc(20px * var(--scale)) !important;
+}
+
+.detail-count {
+  font-size: calc(40px * var(--scale)) !important;
+}
+
+.detail-sub {
+  font-size: calc(11px * var(--scale)) !important;
+  margin-left: calc(46px * var(--scale)) !important;
+}
+
+.tab span {
+  font-size: calc(11px * var(--scale)) !important;
+}
+
+.tab {
+  font-size: calc(15px * var(--scale)) !important;
+}
+
+:root[data-theme="arctic-white"] .tabbar {
+  background: rgba(255,255,255,.82) !important;
+}
+
+:root[data-theme="arctic-white"] dialog {
+  background: #ffffff !important;
+}
+
+:root[data-theme="arctic-white"] input,
+:root[data-theme="arctic-white"] textarea {
+  background: rgba(17,24,39,.04) !important;
+}
+
 </style>
 </head>
 <body>
@@ -561,7 +747,7 @@ function loadState() {
     const state = JSON.parse(localStorage.getItem(TJ_STORAGE_KEY));
     if (state && Array.isArray(state.counters)) return state;
   } catch {}
-  return { version: "2.1.0", counters: [], settings: { language: "en", theme: "midnight-gold", pinEnabled: false, pinHash: "", lockOnOpen: true } };
+  return { version: "2.2.0", counters: [], settings: { language: "en", theme: "midnight-gold", pinEnabled: false, pinHash: "", lockOnOpen: true } };
 }
 
 function saveState(state) {
@@ -575,7 +761,7 @@ function uid() {
 
 function exportJson(state) {
   const blob = new Blob([JSON.stringify({
-    version: "2.0.0",
+    version: "2.2.0",
     appName: "Tally Journal",
     exportedAt: new Date().toISOString(),
     counters: state.counters,
@@ -672,7 +858,16 @@ state.settings = state.settings || {};
 if (typeof state.settings.pinEnabled !== "boolean") state.settings.pinEnabled = false;
 if (typeof state.settings.pinHash !== "string") state.settings.pinHash = "";
 if (typeof state.settings.lockOnOpen !== "boolean") state.settings.lockOnOpen = true;
+if (!state.settings.theme) state.settings.theme = "midnight-gold";
+if (!state.settings.interfaceSize) state.settings.interfaceSize = "standard";
 saveState(state);
+
+function applyAppearance() {
+  document.documentElement.setAttribute("data-theme", state.settings.theme || "midnight-gold");
+  document.documentElement.setAttribute("data-size", state.settings.interfaceSize || "standard");
+}
+
+applyAppearance();
 
 let locked = !!state.settings.pinEnabled;
 let screen = "home";
@@ -993,12 +1188,86 @@ function renderJournal() {
   `;
 }
 
+
+function setTheme(theme) {
+  state.settings.theme = theme;
+  saveState(state);
+  applyAppearance();
+  render();
+}
+
+function setInterfaceSize(size) {
+  state.settings.interfaceSize = size;
+  saveState(state);
+  applyAppearance();
+  render();
+}
+
+function themeLabel(value) {
+  const labels = {
+    "midnight-gold": "Midnight Gold",
+    "emerald-elite": "Emerald Elite",
+    "arctic-white": "Arctic White"
+  };
+  return labels[value] || "Midnight Gold";
+}
+
+function sizeLabel(value) {
+  const labels = {
+    "compact": "Compact",
+    "standard": "Standard",
+    "comfortable": "Comfortable",
+    "large": "Large"
+  };
+  return labels[value] || "Standard";
+}
+
+function openChoiceDialog(title, options, currentValue, onSelectName) {
+  const dialog = document.createElement("dialog");
+  dialog.innerHTML = `
+    <div class="modal">
+      <h2>${title}</h2>
+      <div class="list">
+        ${options.map(option => `
+          <button onclick="${onSelectName}('${option.value}'); this.closest('dialog').remove()" class="${option.value === currentValue ? "primary" : ""}">
+            ${option.label}
+          </button>
+        `).join("")}
+      </div>
+      <div class="modal-actions">
+        <button onclick="this.closest('dialog').remove()">Cancel</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
+
+function openThemeDialog() {
+  openChoiceDialog("Theme", [
+    { value: "midnight-gold", label: "🟨 Midnight Gold" },
+    { value: "emerald-elite", label: "💚 Emerald Elite" },
+    { value: "arctic-white", label: "⚪ Arctic White" }
+  ], state.settings.theme || "midnight-gold", "setTheme");
+}
+
+function openSizeDialog() {
+  openChoiceDialog("Interface Size", [
+    { value: "compact", label: "Compact" },
+    { value: "standard", label: "Standard" },
+    { value: "comfortable", label: "Comfortable" },
+    { value: "large", label: "Large" }
+  ], state.settings.interfaceSize || "standard", "setInterfaceSize");
+}
+
+
 function renderSettings() {
   app.innerHTML = `
     ${renderHeader("Settings", "Privacy, backup and app preferences.")}
     <div class="section-title"><span>General</span></div>
     <div class="settings-row"><span>Language</span><span>English</span></div>
-    <div class="settings-row"><span>Theme</span><span>Midnight Gold</span></div>
+    <button class="settings-row" onclick="openThemeDialog()"><span>Theme</span><span>${themeLabel(state.settings.theme)}</span></button>
+    <button class="settings-row" onclick="openSizeDialog()"><span>Interface Size</span><span>${sizeLabel(state.settings.interfaceSize)}</span></button>
 
     <div class="section-title"><span>Privacy</span></div>
     <div class="settings-row"><span>Access Control</span><span>${state.settings.pinEnabled ? "PIN enabled" : "Off"}</span></div>
@@ -1020,9 +1289,9 @@ function renderSettings() {
     <button class="settings-row" onclick="updateAppCache()"><span>Update App Cache</span><span>Refresh</span></button>
 
     <div class="section-title"><span>About</span></div>
-    <div class="settings-row"><span>Version</span><span>2.1.1</span></div>
-    <div class="settings-row"><span>Release</span><span>Overscroll Fix</span></div>
-    <div class="settings-row"><span>Build</span><span>20260709-2335</span></div>
+    <div class="settings-row"><span>Version</span><span>2.2.0</span></div>
+    <div class="settings-row"><span>Release</span><span>Themes and Size</span></div>
+    <div class="settings-row"><span>Build</span><span>20260709-2355</span></div>
   `;
 }
 
