@@ -484,7 +484,20 @@ textarea {
   margin-top: 12px;
 }
 
-  </style>
+  
+.lock-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.settings-row.danger {
+  color: white;
+  background: rgba(255,107,107,.18);
+  border: 1px solid rgba(255,107,107,.35);
+}
+
+</style>
 </head>
 <body>
   <div id="app" class="app"></div>
@@ -505,7 +518,7 @@ function loadState() {
     const state = JSON.parse(localStorage.getItem(TJ_STORAGE_KEY));
     if (state && Array.isArray(state.counters)) return state;
   } catch {}
-  return { version: "2.0.0", counters: [], settings: { language: "en", theme: "midnight-gold" } };
+  return { version: "2.1.0", counters: [], settings: { language: "en", theme: "midnight-gold", pinEnabled: false, pinHash: "", lockOnOpen: true } };
 }
 
 function saveState(state) {
@@ -612,6 +625,13 @@ const app = document.getElementById("app");
 const importFile = document.getElementById("importFile");
 
 let state = loadState();
+state.settings = state.settings || {};
+if (typeof state.settings.pinEnabled !== "boolean") state.settings.pinEnabled = false;
+if (typeof state.settings.pinHash !== "string") state.settings.pinHash = "";
+if (typeof state.settings.lockOnOpen !== "boolean") state.settings.lockOnOpen = true;
+saveState(state);
+
+let locked = !!state.settings.pinEnabled;
 let screen = "home";
 let mode = "active";
 let selectedCounterId = null;
@@ -636,7 +656,143 @@ importFile.addEventListener("change", event => {
   importJsonFile(file, state, render);
 });
 
+
+function hashPin(pin) {
+  let hash = 0;
+  const text = "tj:" + String(pin);
+  for (let i = 0; i < text.length; i++) {
+    hash = ((hash << 5) - hash) + text.charCodeAt(i);
+    hash |= 0;
+  }
+  return String(hash);
+}
+
+function showLockScreen() {
+  app.innerHTML = `
+    <div class="header">
+      <div>
+        <div class="eyebrow">Private journal locked</div>
+        <h1>Tally Journal</h1>
+        <div class="subtitle">Enter your PIN to unlock your journal.</div>
+      </div>
+    </div>
+
+    <div class="detail-card">
+      <label>PIN Code</label>
+      <input id="unlockPin" type="password" inputmode="numeric" maxlength="12" placeholder="Enter PIN" />
+      <div class="actions" style="margin-top:10px">
+        <button class="wide primary" onclick="unlockApp()">Unlock</button>
+      </div>
+      <p class="subtitle" style="margin-top:10px">If you forget your PIN, your local app data cannot be unlocked from this screen. Keep a JSON backup somewhere safe.</p>
+    </div>
+  `;
+  setTimeout(() => document.getElementById("unlockPin")?.focus(), 100);
+}
+
+function unlockApp() {
+  const pin = document.getElementById("unlockPin")?.value || "";
+  if (hashPin(pin) === state.settings.pinHash) {
+    locked = false;
+    render();
+  } else {
+    alert("Incorrect PIN.");
+  }
+}
+
+function setPin() {
+  const pin1 = prompt("Choose a PIN code. Use at least 4 digits.");
+  if (pin1 === null) return;
+  if (!/^\d{4,12}$/.test(pin1)) {
+    alert("PIN must be 4 to 12 digits.");
+    return;
+  }
+
+  const pin2 = prompt("Repeat your PIN code.");
+  if (pin2 === null) return;
+
+  if (pin1 !== pin2) {
+    alert("PIN codes do not match.");
+    return;
+  }
+
+  state.settings.pinEnabled = true;
+  state.settings.pinHash = hashPin(pin1);
+  state.settings.lockOnOpen = true;
+  saveState(state);
+  alert("PIN enabled.");
+  render();
+}
+
+function changePin() {
+  const oldPin = prompt("Enter current PIN.");
+  if (oldPin === null) return;
+  if (hashPin(oldPin) !== state.settings.pinHash) {
+    alert("Incorrect PIN.");
+    return;
+  }
+
+  const pin1 = prompt("Choose a new PIN code. Use at least 4 digits.");
+  if (pin1 === null) return;
+  if (!/^\d{4,12}$/.test(pin1)) {
+    alert("PIN must be 4 to 12 digits.");
+    return;
+  }
+
+  const pin2 = prompt("Repeat your new PIN code.");
+  if (pin2 === null) return;
+  if (pin1 !== pin2) {
+    alert("PIN codes do not match.");
+    return;
+  }
+
+  state.settings.pinHash = hashPin(pin1);
+  saveState(state);
+  alert("PIN changed.");
+  render();
+}
+
+function disablePin() {
+  const pin = prompt("Enter current PIN to disable access control.");
+  if (pin === null) return;
+  if (hashPin(pin) !== state.settings.pinHash) {
+    alert("Incorrect PIN.");
+    return;
+  }
+
+  if (!confirm("Disable PIN protection?")) return;
+  state.settings.pinEnabled = false;
+  state.settings.pinHash = "";
+  saveState(state);
+  alert("PIN disabled.");
+  render();
+}
+
+function lockNow() {
+  if (!state.settings.pinEnabled) return;
+  locked = true;
+  showLockScreen();
+}
+
+function updateAppCache() {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      registrations.forEach(registration => registration.unregister());
+      if ("caches" in window) {
+        caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))).then(() => {
+          alert("App cache cleared. Close and reopen the app.");
+        });
+      } else {
+        alert("Service worker cleared. Close and reopen the app.");
+      }
+    });
+  } else {
+    alert("No app cache found.");
+  }
+}
+
+
 function render() {
+  if (locked) return showLockScreen();
   if (selectedCounterId) return renderDetail(selectedCounterId);
   if (screen === "settings") return renderSettings();
   if (screen === "journal") return renderJournal();
@@ -796,19 +952,34 @@ function renderJournal() {
 
 function renderSettings() {
   app.innerHTML = `
-    ${renderHeader("Settings", "Small for now. More options will come later.")}
+    ${renderHeader("Settings", "Privacy, backup and app preferences.")}
     <div class="section-title"><span>General</span></div>
     <div class="settings-row"><span>Language</span><span>English</span></div>
     <div class="settings-row"><span>Theme</span><span>Midnight Gold</span></div>
+
+    <div class="section-title"><span>Privacy</span></div>
+    <div class="settings-row"><span>Access Control</span><span>${state.settings.pinEnabled ? "PIN enabled" : "Off"}</span></div>
+    ${state.settings.pinEnabled ? `
+      <button class="settings-row" onclick="lockNow()"><span>Lock Now</span><span>Secure</span></button>
+      <button class="settings-row" onclick="changePin()"><span>Change PIN</span><span>PIN</span></button>
+      <button class="settings-row danger" onclick="disablePin()"><span>Disable PIN</span><span>Off</span></button>
+    ` : `
+      <button class="settings-row" onclick="setPin()"><span>Set PIN Code</span><span>4-12 digits</span></button>
+    `}
+    <div class="settings-row"><span>Face ID</span><span>Coming later</span></div>
 
     <div class="section-title"><span>Data</span></div>
     <button class="settings-row" onclick="importFile.click()"><span>Import JSON</span><span>Choose file</span></button>
     <button class="settings-row" onclick="exportJson(state)"><span>Export Backup</span><span>JSON</span></button>
     <button class="settings-row" onclick="exportCsv(state.counters)"><span>Export CSV</span><span>Spreadsheet</span></button>
 
+    <div class="section-title"><span>Maintenance</span></div>
+    <button class="settings-row" onclick="updateAppCache()"><span>Update App Cache</span><span>Refresh</span></button>
+
     <div class="section-title"><span>About</span></div>
-    <div class="settings-row"><span>Version</span><span>2.0.0</span></div>
-    <div class="settings-row"><span>Build</span><span>20260709-2200</span></div>
+    <div class="settings-row"><span>Version</span><span>2.1.0</span></div>
+    <div class="settings-row"><span>Release</span><span>Privacy Foundation</span></div>
+    <div class="settings-row"><span>Build</span><span>20260709-2300</span></div>
   `;
 }
 

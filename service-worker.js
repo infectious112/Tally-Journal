@@ -1,4 +1,4 @@
-const CACHE_NAME = "tally-journal-v2-0-0-iphone";
+const CACHE_NAME = "tally-journal-v2-1-0";
 const FILES = [
   "./",
   "./index.html",
