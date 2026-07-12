@@ -781,6 +781,307 @@ body::before {
   }
 }
 
+
+/* v2.3.0 Welcome */
+.tj-toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(76px + var(--safe-bottom));
+  z-index: 999;
+  transform: translate(-50%, 16px);
+  opacity: 0;
+  color: #07120c;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--theme-accent) 82%, white), var(--theme-accent2));
+  border-radius: 999px;
+  padding: 9px 14px;
+  font-size: 12px;
+  font-weight: 800;
+  box-shadow: 0 14px 34px rgba(0,0,0,.32);
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.tj-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tj-onboarding {
+  width: min(92vw, 410px);
+}
+
+.onboarding-card {
+  text-align: center;
+  padding: calc(18px * var(--scale)) !important;
+}
+
+.onboarding-progress {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.onboarding-progress span {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.onboarding-progress span.active {
+  width: 22px;
+  background: var(--theme-accent);
+}
+
+.onboarding-icon,
+.help-hero-icon {
+  width: calc(54px * var(--scale));
+  height: calc(54px * var(--scale));
+  margin: 0 auto 12px;
+  display: grid;
+  place-items: center;
+  border-radius: 18px;
+  font-size: calc(29px * var(--scale));
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+}
+
+.onboarding-card p,
+.help-copy {
+  color: var(--muted);
+  font-size: calc(13px * var(--scale));
+  line-height: 1.55;
+}
+
+.stacked-actions {
+  display: grid !important;
+  grid-template-columns: 1fr;
+}
+
+.stacked-actions button {
+  width: 100%;
+}
+
+.help-list-grid {
+  display: grid;
+  gap: calc(7px * var(--scale));
+}
+
+.help-row {
+  width: 100%;
+  min-height: calc(45px * var(--scale));
+  display: grid;
+  grid-template-columns: calc(32px * var(--scale)) 1fr auto;
+  align-items: center;
+  gap: calc(9px * var(--scale));
+  text-align: left;
+  border-radius: calc(13px * var(--scale));
+  background: var(--panel);
+}
+
+.help-row-icon {
+  font-size: calc(20px * var(--scale));
+}
+
+.help-row b {
+  color: var(--muted);
+  font-size: calc(20px * var(--scale));
+}
+
+.replay-intro {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.help-article {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: calc(18px * var(--scale));
+  padding: calc(15px * var(--scale));
+}
+
+.help-article .help-hero-icon {
+  margin-left: 0;
+}
+
+.help-article h1 {
+  margin-bottom: 14px;
+}
+
+.help-body {
+  color: var(--text);
+  font-size: calc(13px * var(--scale));
+  line-height: 1.62;
+}
+
+.help-body p {
+  color: var(--muted);
+}
+
+.help-body strong,
+.help-body h3 {
+  color: var(--text);
+}
+
+.help-body h3 {
+  margin: 18px 0 7px;
+  font-size: calc(14px * var(--scale));
+}
+
+.help-list {
+  margin: 8px 0 14px;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.help-list li {
+  margin: 6px 0;
+}
+
+.help-list.numbered {
+  padding-left: 22px;
+}
+
+.example-grid,
+.principles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+  margin: 12px 0;
+}
+
+.example-grid span,
+.principles span {
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  border-radius: 12px;
+  padding: 9px;
+  color: var(--text);
+  font-size: calc(12px * var(--scale));
+}
+
+.help-action {
+  width: 100%;
+  margin: 8px 0;
+}
+
+.disabled-action {
+  opacity: .55;
+}
+
+.info-card {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  padding: 10px 0;
+}
+
+.faq-item:first-child {
+  padding-top: 0;
+}
+
+.faq-item:last-child {
+  border-bottom: 0;
+}
+
+.faq-item p {
+  margin-bottom: 0;
+}
+
+.release-card {
+  border: 1px solid var(--line);
+  background: var(--panel-strong);
+  border-radius: 13px;
+  padding: 11px;
+  margin-bottom: 9px;
+}
+
+.release-card.current {
+  box-shadow: inset 3px 0 0 var(--theme-accent);
+}
+
+.release-card strong,
+.release-card span {
+  display: block;
+}
+
+.release-card span {
+  color: var(--muted);
+  font-size: calc(11px * var(--scale));
+  margin-top: 2px;
+}
+
+.release-card ul {
+  color: var(--muted);
+  padding-left: 18px;
+  margin-bottom: 0;
+}
+
+.contact-card {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  border-radius: 14px;
+  margin: 7px 0;
+  background: var(--panel-strong);
+}
+
+.contact-card > span {
+  font-size: calc(20px * var(--scale));
+}
+
+.contact-card strong,
+.contact-card small {
+  display: block;
+}
+
+.contact-card small {
+  color: var(--muted);
+  margin-top: 2px;
+  line-height: 1.35;
+}
+
+.contact-card b {
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.contact-address,
+.made-in {
+  text-align: center;
+  font-size: calc(11px * var(--scale));
+  color: var(--muted);
+}
+
+blockquote {
+  margin: 14px 0;
+  padding: 12px 14px;
+  border-left: 3px solid var(--theme-accent);
+  background: var(--panel-strong);
+  border-radius: 0 12px 12px 0;
+  color: var(--text);
+  font-weight: 750;
+}
+
+@media (max-width: 360px) {
+  .example-grid,
+  .principles {
+    grid-template-columns: 1fr;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -796,16 +1097,27 @@ body::before {
 
   <script>
 const TJ_STORAGE_KEY = "tally-journal-v2";
+const TJ_VERSION = "2.3.0";
+const TJ_RELEASE = "Welcome";
+const TJ_BUILD = "20260712-01";
+const TJ_CONTACT_EMAIL = "my.telly.journal@gmail.com";
 
 function loadState() {
   try {
     const state = JSON.parse(localStorage.getItem(TJ_STORAGE_KEY));
     if (state && Array.isArray(state.counters)) return state;
   } catch {}
-  return { version: "2.2.0", counters: [], settings: { language: "en", theme: "midnight-gold", pinEnabled: false, pinHash: "", lockOnOpen: true } };
+  return { version: TJ_VERSION, counters: [], settings: { language: "en", theme: "midnight-gold", pinEnabled: false, pinHash: "", lockOnOpen: true } };
 }
 
-function saveState(state) {
+function saveState(state, markDataChange = true) {
+  state.version = TJ_VERSION;
+  state.settings = state.settings || {};
+
+  if (markDataChange) {
+    state.settings.lastDataChangeAt = new Date().toISOString();
+  }
+
   localStorage.setItem(TJ_STORAGE_KEY, JSON.stringify(state));
 }
 
@@ -815,15 +1127,28 @@ function uid() {
 
 
 function exportJson(state) {
-  const blob = new Blob([JSON.stringify({
-    version: "2.2.0",
+  const now = new Date();
+  const filename = `TJ-Backup-${fileTimestamp(now)}.json`;
+
+  const backup = {
+    version: TJ_VERSION,
+    release: TJ_RELEASE,
+    build: TJ_BUILD,
     appName: "Tally Journal",
-    exportedAt: new Date().toISOString(),
+    exportedAt: now.toISOString(),
     counters: state.counters,
     settings: state.settings
-  }, null, 2)], { type: "application/json" });
+  };
 
-  downloadBlob(blob, "tally-journal-backup.json");
+  const blob = new Blob([JSON.stringify(backup, null, 2)], { type: "application/json" });
+  downloadBlob(blob, filename);
+
+  state.settings.lastBackupAt = now.toISOString();
+  state.settings.lastDataChangeAt = state.settings.lastBackupAt;
+  saveState(state, false);
+
+  showToast("Backup created");
+  if (screen === "settings") renderSettings();
 }
 
 function exportCsv(counters) {
@@ -841,7 +1166,12 @@ function exportCsv(counters) {
   });
 
   const csv = rows.map(row => row.map(v => `"${String(v).replaceAll('"', '""')}"`).join(";")).join("\n");
-  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), "tally-journal-export.csv");
+  downloadBlob(new Blob([csv], { type: "text/csv;charset=utf-8" }), `TJ-Export-${fileTimestamp(new Date())}.csv`);
+}
+
+function fileTimestamp(date = new Date()) {
+  const pad = value => String(value).padStart(2, "0");
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}-${pad(date.getHours())}${pad(date.getMinutes())}`;
 }
 
 function downloadBlob(blob, filename) {
@@ -877,7 +1207,9 @@ function importJsonFile(file, state, onDone) {
         state.counters = counters;
       }
 
-      saveState(state);
+      state.settings = state.settings || {};
+      state.settings.lastDataChangeAt = new Date().toISOString();
+      saveState(state, false);
       alert("Import completed.");
       onDone();
     } catch {
@@ -915,7 +1247,12 @@ if (typeof state.settings.pinHash !== "string") state.settings.pinHash = "";
 if (typeof state.settings.lockOnOpen !== "boolean") state.settings.lockOnOpen = true;
 if (!state.settings.theme) state.settings.theme = "midnight-gold";
 if (!state.settings.interfaceSize) state.settings.interfaceSize = "standard";
-saveState(state);
+if (typeof state.settings.onboardingCompleted !== "boolean") state.settings.onboardingCompleted = false;
+if (typeof state.settings.lastSeenVersion !== "string") state.settings.lastSeenVersion = "";
+if (typeof state.settings.lastBackupAt !== "string") state.settings.lastBackupAt = "";
+if (typeof state.settings.lastDataChangeAt !== "string") state.settings.lastDataChangeAt = "";
+if (typeof state.settings.backupReminderDismissedAt !== "string") state.settings.backupReminderDismissedAt = "";
+saveState(state, false);
 
 function applyAppearance() {
   document.documentElement.setAttribute("data-theme", state.settings.theme || "midnight-gold");
@@ -926,6 +1263,8 @@ applyAppearance();
 
 let locked = !!state.settings.pinEnabled;
 let screen = "home";
+let helpArticle = null;
+let startupChecksCompleted = false;
 let mode = "active";
 let selectedCounterId = null;
 let selectedColor = "#d7b56d";
@@ -1084,12 +1423,501 @@ function updateAppCache() {
 }
 
 
+
+function showToast(message) {
+  const existing = document.querySelector(".tj-toast");
+  if (existing) existing.remove();
+
+  const toast = document.createElement("div");
+  toast.className = "tj-toast";
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add("show"));
+  setTimeout(() => {
+    toast.classList.remove("show");
+    setTimeout(() => toast.remove(), 220);
+  }, 1700);
+}
+
+function formatFriendlyDate(value) {
+  if (!value) return "Never";
+  return new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  }).format(new Date(value));
+}
+
+function sameCalendarDay(a, b) {
+  if (!a || !b) return false;
+  return new Date(a).toDateString() === new Date(b).toDateString();
+}
+
+function hasUnbackedChanges() {
+  const changed = state.settings.lastDataChangeAt;
+  const backedUp = state.settings.lastBackupAt;
+
+  if (!changed) return false;
+  if (!backedUp) return state.counters.some(counter => (counter.entries || []).length > 0);
+  return new Date(changed) > new Date(backedUp);
+}
+
+function showBackupReminder() {
+  const dialog = document.createElement("dialog");
+  dialog.className = "tj-system-dialog";
+  dialog.innerHTML = `
+    <div class="modal">
+      <div class="help-hero-icon">💾</div>
+      <h2>Backup recommended</h2>
+      <p class="help-copy">
+        Your journal contains changes that have not been backed up yet.
+      </p>
+      <p class="help-copy">
+        Tally Journal is currently under active development. Creating a backup only takes a few seconds and helps protect your data.
+      </p>
+      <div class="modal-actions stacked-actions">
+        <button class="primary" onclick="exportJson(state); this.closest('dialog').remove()">Create Backup</button>
+        <button onclick="dismissBackupReminder(this.closest('dialog'))">Remind Me Later</button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(dialog);
+  dialog.addEventListener("close", () => dialog.remove());
+  dialog.showModal();
+}
+
+function dismissBackupReminder(dialog) {
+  state.settings.backupReminderDismissedAt = new Date().toISOString();
+  saveState(state, false);
+  dialog.remove();
+}
+
+function runStartupChecks() {
+  if (startupChecksCompleted || locked || !state.settings.onboardingCompleted) return;
+  startupChecksCompleted = true;
+
+  const dismissedToday = sameCalendarDay(
+    state.settings.backupReminderDismissedAt,
+    new Date().toISOString()
+  );
+
+  if (hasUnbackedChanges() && !dismissedToday) {
+    setTimeout(showBackupReminder, 450);
+  }
+}
+
+function showOnboarding(step = 0) {
+  const pages = [
+    {
+      icon: "👋",
+      title: "Welcome to Tally Journal",
+      body: "Tally Journal helps you record moments, habits and recurring events with a single tap. Every entry becomes part of a dated timeline, helping you recognize patterns and remember the story behind every count."
+    },
+    {
+      icon: "🧠",
+      title: "Inspired by ADHD",
+      body: "Tally Journal was originally created to help people with ADHD recognize behaviours, routines and recurring situations. It is also designed for anyone who wants more insight into everyday life."
+    },
+    {
+      icon: "💾",
+      title: "Keep your data safe",
+      body: "Tally Journal is currently under active development. I strongly recommend creating regular backups, especially after adding or changing important entries."
+    }
+  ];
+
+  const page = pages[step];
+  const dialog = document.createElement("dialog");
+  dialog.className = "tj-onboarding";
+  dialog.innerHTML = `
+    <div class="modal onboarding-card">
+      <div class="onboarding-progress">${pages.map((_, i) => `<span class="${i === step ? "active" : ""}"></span>`).join("")}</div>
+      <div class="onboarding-icon">${page.icon}</div>
+      <h2>${page.title}</h2>
+      <p>${page.body}</p>
+
+      <div class="modal-actions stacked-actions">
+        ${step === pages.length - 1
+          ? `<button class="primary" onclick="exportJson(state)">Create Backup</button>
+             <button onclick="finishOnboarding(this.closest('dialog'))">Continue</button>`
+          : `<button class="primary" onclick="nextOnboarding(${step + 1}, this.closest('dialog'))">Continue</button>`
+        }
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
+
+function nextOnboarding(step, dialog) {
+  dialog.remove();
+  showOnboarding(step);
+}
+
+function finishOnboarding(dialog) {
+  state.settings.onboardingCompleted = true;
+  state.settings.lastSeenVersion = TJ_VERSION;
+  saveState(state, false);
+  dialog.remove();
+  render();
+  setTimeout(runStartupChecks, 350);
+}
+
+function replayOnboarding() {
+  showOnboarding(0);
+}
+
+function openContact(type) {
+  const subjects = {
+    feedback: "Tally Journal Feedback",
+    bug: "Tally Journal Bug Report",
+    feature: "Tally Journal Feature Request",
+    question: "Tally Journal Question"
+  };
+
+  const prompts = {
+    feedback: "Please share your feedback below:",
+    bug: "What happened? What did you expect to happen?",
+    feature: "Please describe your idea below:",
+    question: "Please write your question below:"
+  };
+
+  const subject = `${subjects[type]} - v${TJ_VERSION} - Build ${TJ_BUILD}`;
+  const body = `${prompts[type]}
+
+App version: ${TJ_VERSION}
+Release: ${TJ_RELEASE}
+Build: ${TJ_BUILD}
+Theme: ${themeLabel(state.settings.theme)}
+Interface size: ${sizeLabel(state.settings.interfaceSize)}
+Platform: ${navigator.platform || "Unknown"}
+
+`;
+
+  window.location.href = `mailto:${TJ_CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+const HELP_ARTICLES = {
+  welcome: {
+    icon: "👋",
+    title: "Welcome",
+    subtitle: "Welcome to Tally Journal",
+    body: `
+      <p>Thank you for choosing Tally Journal.</p>
+      <p>I created Tally Journal because I wanted something simple. Not another complicated journal. Not another basic tally counter.</p>
+      <p>I wanted a place where every tap could become a meaningful moment. Every count can tell a story.</p>
+      <p>I hope Tally Journal becomes just as useful for you as it has been for me.</p>
+    `
+  },
+  what: {
+    icon: "📖",
+    title: "What is Tally Journal?",
+    subtitle: "More than just a tally counter",
+    body: `
+      <p>Most tally apps increase a number. Tally Journal remembers why.</p>
+      <p>Every entry can include a date, time and note. Together they create a timeline that helps you look back, understand patterns and remember important moments.</p>
+      <p><strong>Simple to use. Powerful over time.</strong></p>
+    `
+  },
+  why: {
+    icon: "💚",
+    title: "Why was it created?",
+    subtitle: "A personal project",
+    body: `
+      <p>The idea behind Tally Journal came from everyday life.</p>
+      <p>I often wanted to remember when something happened, how often it occurred or what was going on at that moment.</p>
+      <p>A diary felt like too much. A spreadsheet felt too complicated. A normal tally counter was not enough.</p>
+      <p>So I built something in between. Something that stays fast while adding context to every count.</p>
+    `
+  },
+  adhd: {
+    icon: "🧠",
+    title: "ADHD as Inspiration",
+    subtitle: "Inspired by real life",
+    body: `
+      <p>Tally Journal was originally created with people with ADHD in mind.</p>
+      <p>Many people struggle to remember when something happened or to recognize patterns over time. By recording moments with a single tap, those patterns slowly become visible.</p>
+      <p>Although ADHD inspired the project, Tally Journal is not only an ADHD app. It is a journal for anyone who wants more insight into habits, routines and everyday life.</p>
+      <p>Tally Journal does not diagnose conditions or replace professional advice. It simply helps you collect and review information about your own life.</p>
+    `
+  },
+  everyone: {
+    icon: "🌍",
+    title: "For Everyone",
+    subtitle: "Track what matters",
+    body: `
+      <p>Use Tally Journal for anything you want.</p>
+      <div class="example-grid">
+        <span>❤️ Relationships</span><span>💊 Medication</span>
+        <span>💪 Fitness</span><span>😴 Sleep</span>
+        <span>📚 Reading</span><span>😊 Mood</span>
+        <span>🧠 Migraines</span><span>☕ Caffeine</span>
+        <span>🐶 Pets</span><span>🔧 Maintenance</span>
+        <span>🎯 Personal goals</span><span>💼 Work</span>
+      </div>
+      <p><strong>Your journal. Your story.</strong></p>
+    `
+  },
+  features: {
+    icon: "✨",
+    title: "Features",
+    subtitle: "Current features",
+    body: `
+      <ul class="help-list">
+        <li>Unlimited counters</li>
+        <li>Entries with date and time</li>
+        <li>Optional notes</li>
+        <li>Counter archive</li>
+        <li>JSON import and backup</li>
+        <li>CSV export</li>
+        <li>PIN protection</li>
+        <li>Multiple themes</li>
+        <li>Adjustable interface size</li>
+        <li>Private local storage</li>
+      </ul>
+      <p>More features are added with every release.</p>
+    `
+  },
+  gettingStarted: {
+    icon: "🚀",
+    title: "Getting Started",
+    subtitle: "Your first journal",
+    body: `
+      <ol class="help-list numbered">
+        <li>Create a counter.</li>
+        <li>Choose a name.</li>
+        <li>Pick an emoji.</li>
+        <li>Tap “+ Add Entry” whenever something happens.</li>
+        <li>Add a note if you want.</li>
+      </ol>
+      <p>That is all you need to start building a useful timeline.</p>
+    `
+  },
+  backup: {
+    icon: "💾",
+    title: "Backup Reminder",
+    subtitle: "Keep your journal safe",
+    body: `
+      <p>Tally Journal is currently under active development. New features and improvements are released regularly.</p>
+      <p>Although every release is tested carefully, I recommend creating a backup after adding or changing important information.</p>
+      <p>Go to <strong>Settings → Export Backup</strong>. A backup only takes a few seconds.</p>
+      <button class="primary help-action" onclick="exportJson(state)">Create Backup Now</button>
+      <div class="info-card">
+        <span>Last backup</span>
+        <strong>${formatFriendlyDate(state.settings.lastBackupAt)}</strong>
+      </div>
+    `
+  },
+  faq: {
+    icon: "❓",
+    title: "FAQ",
+    subtitle: "Frequently asked questions",
+    body: `
+      <div class="faq-item"><strong>Is my data stored online?</strong><p>No. Everything stays on your own device.</p></div>
+      <div class="faq-item"><strong>Do I need an account?</strong><p>No. Tally Journal works without accounts.</p></div>
+      <div class="faq-item"><strong>Are there advertisements?</strong><p>No. Tally Journal is designed to remain ad-free.</p></div>
+      <div class="faq-item"><strong>Is my data tracked?</strong><p>No. Privacy always comes first.</p></div>
+      <div class="faq-item"><strong>Can I restore my data?</strong><p>Yes. Import your latest JSON backup from Settings.</p></div>
+      <div class="faq-item"><strong>Why do I see backup reminders?</strong><p>The app is under active development. Regular backups help protect your journal while frequent updates are released.</p></div>
+    `
+  },
+  roadmap: {
+    icon: "🗺️",
+    title: "Roadmap",
+    subtitle: "What is next?",
+    body: `
+      <h3>Currently in development</h3>
+      <ul class="help-list"><li>Swipe Actions</li><li>Recently Deleted</li><li>Multi Select</li><li>Enhanced Privacy</li></ul>
+      <h3>Planned</h3>
+      <ul class="help-list"><li>Counter Settings</li><li>Enhanced Search</li><li>Dashboard</li><li>Statistics</li><li>Expanded Import and Export</li></ul>
+      <h3>Future</h3>
+      <ul class="help-list"><li>AI Insights</li><li>Widgets</li><li>Native iPhone App</li><li>Face ID</li></ul>
+      <p>The roadmap can change based on real use and feedback.</p>
+    `
+  },
+  whatsNew: {
+    icon: "🆕",
+    title: "What’s New",
+    subtitle: "Release history",
+    body: `
+      <div class="release-card current">
+        <strong>Version 2.3.0</strong><span>Welcome · Build ${TJ_BUILD}</span>
+        <ul><li>Added Help & Tips</li><li>Added the first-time Welcome Guide</li><li>Added backup reminders and backup status</li><li>Added Feedback & Contact</li><li>Added Roadmap, My Philosophy and About the Developer</li><li>Improved backup and export filenames</li></ul>
+      </div>
+      <div class="release-card">
+        <strong>Version 2.2.1</strong><span>Welcome</span>
+        <ul><li>Fixed the white overscroll area in Compact mode</li><li>Improved the full-screen iPhone layout</li></ul>
+      </div>
+      <div class="release-card">
+        <strong>Version 2.2.0</strong><span>Themes and Size</span>
+        <ul><li>Added Midnight Gold</li><li>Added Emerald Elite</li><li>Added Arctic White</li><li>Added four interface sizes</li></ul>
+      </div>
+      <div class="release-card">
+        <strong>Version 2.1.0</strong><span>Privacy Foundation</span>
+        <ul><li>Added PIN protection</li><li>Added Lock Now</li><li>Added PIN management</li></ul>
+      </div>
+    `
+  },
+  feedback: {
+    icon: "💬",
+    title: "Feedback & Contact",
+    subtitle: "Help shape Tally Journal",
+    body: `
+      <p>Tally Journal grows through real feedback. If you have an idea, found a bug or simply want to share your experience, I would love to hear from you.</p>
+      <button class="contact-card" onclick="openContact('feedback')"><span>💬</span><div><strong>Send Feedback</strong><small>Share your thoughts and experience.</small></div><b>›</b></button>
+      <button class="contact-card" onclick="openContact('bug')"><span>🐞</span><div><strong>Report a Bug</strong><small>Tell me what happened and what you expected.</small></div><b>›</b></button>
+      <button class="contact-card" onclick="openContact('feature')"><span>💡</span><div><strong>Request a Feature</strong><small>Share an idea that could improve the app.</small></div><b>›</b></button>
+      <button class="contact-card" onclick="openContact('question')"><span>❓</span><div><strong>Ask a Question</strong><small>Need help? Feel free to contact me.</small></div><b>›</b></button>
+      <p class="contact-address">${TJ_CONTACT_EMAIL}</p>
+    `
+  },
+  community: {
+    icon: "❤️",
+    title: "Community",
+    subtitle: "Built together",
+    body: `
+      <p>Although Tally Journal started as a personal project, it continues to grow thanks to the people who use it every day.</p>
+      <p>Every suggestion, bug report and conversation helps shape the future of the app.</p>
+      <p>Thank you for being part of that journey.</p>
+    `
+  },
+  philosophy: {
+    icon: "🛡️",
+    title: "My Philosophy",
+    subtitle: "Software should respect its users",
+    body: `
+      <div class="principles">
+        <span>Privacy First</span><span>Local First</span>
+        <span>No Ads</span><span>No Tracking</span>
+        <span>No Required Account</span><span>Premium Experience</span>
+      </div>
+      <p>I do not build features to collect more data or increase screen time. I build features because they genuinely improve the experience.</p>
+      <blockquote>Does this make Tally Journal better for its users?</blockquote>
+      <p>If the answer is no, I do not build it.</p>
+      <p>Core journaling should remain simple, private and accessible without advertising or tracking.</p>
+    `
+  },
+  support: {
+    icon: "☕",
+    title: "Support Development",
+    subtitle: "Keep Tally Journal independent",
+    body: `
+      <p>Tally Journal is developed in my spare time.</p>
+      <p>If you enjoy using the app and would like to support future development, you will soon be able to buy me a coffee.</p>
+      <p>Your support will help me keep Tally Journal ad-free, privacy-first and independent.</p>
+      <button disabled class="help-action disabled-action">Buy Me a Coffee · Coming Soon</button>
+    `
+  },
+  developer: {
+    icon: "👨‍💻",
+    title: "About the Developer",
+    subtitle: "Hi, I’m Martijn",
+    body: `
+      <p>Tally Journal started because I could not find an app that worked the way I wanted.</p>
+      <p>I was not looking for another tally counter. I wanted something that could remember the story behind every count.</p>
+      <p>What started as a small personal project has grown through real use, feedback and ideas from others.</p>
+      <p>I continue to develop Tally Journal one release at a time, with a strong focus on privacy, simplicity and quality.</p>
+      <p><strong>Thank you for trusting Tally Journal with your memories.</strong></p>
+      <p class="made-in">Made with care in the Netherlands.</p>
+    `
+  }
+};
+
+const HELP_ITEMS = [
+  ["welcome", "👋", "Welcome"],
+  ["what", "📖", "What is Tally Journal?"],
+  ["why", "💚", "Why was it created?"],
+  ["adhd", "🧠", "ADHD as Inspiration"],
+  ["everyone", "🌍", "For Everyone"],
+  ["features", "✨", "Features"],
+  ["gettingStarted", "🚀", "Getting Started"],
+  ["backup", "💾", "Backup Reminder"],
+  ["faq", "❓", "FAQ"],
+  ["roadmap", "🗺️", "Roadmap"],
+  ["whatsNew", "🆕", "What’s New"],
+  ["feedback", "💬", "Feedback & Contact"],
+  ["community", "❤️", "Community"],
+  ["philosophy", "🛡️", "My Philosophy"],
+  ["support", "☕", "Support Development"],
+  ["developer", "👨‍💻", "About the Developer"]
+];
+
+function renderHelpCenter() {
+  screen = "help";
+  helpArticle = null;
+
+  app.innerHTML = `
+    <div class="header">
+      <div>
+        <div class="eyebrow">Guides and information</div>
+        <h1>Help & Tips</h1>
+        <div class="subtitle">Learn what Tally Journal is, how to use it and where it is going.</div>
+      </div>
+      <button onclick="screen='settings'; renderSettings()">Done</button>
+    </div>
+
+    <div class="help-list-grid">
+      ${HELP_ITEMS.map(([id, icon, title]) => `
+        <button class="help-row" onclick="renderHelpArticle('${id}')">
+          <span class="help-row-icon">${icon}</span>
+          <span>${title}</span>
+          <b>›</b>
+        </button>
+      `).join("")}
+    </div>
+
+    <button class="settings-row replay-intro" onclick="replayOnboarding()">
+      <span>Replay Welcome Guide</span><span>Open</span>
+    </button>
+  `;
+  window.scrollTo(0, 0);
+}
+
+function renderHelpArticle(id) {
+  const article = HELP_ARTICLES[id];
+  if (!article) return renderHelpCenter();
+
+  helpArticle = id;
+  app.innerHTML = `
+    <div class="header">
+      <button onclick="renderHelpCenter()">← Back</button>
+      <button onclick="screen='settings'; renderSettings()">Done</button>
+    </div>
+
+    <article class="help-article">
+      <div class="help-hero-icon">${article.icon}</div>
+      <div class="eyebrow">${article.subtitle}</div>
+      <h1>${article.title}</h1>
+      <div class="help-body">${article.body}</div>
+    </article>
+  `;
+  window.scrollTo(0, 0);
+}
+
+
 function render() {
   if (locked) return showLockScreen();
+
+  if (!state.settings.onboardingCompleted) {
+    if (!document.querySelector(".tj-onboarding")) showOnboarding(0);
+    return;
+  }
+
+  if (screen === "help") {
+    return helpArticle ? renderHelpArticle(helpArticle) : renderHelpCenter();
+  }
+
   if (selectedCounterId) return renderDetail(selectedCounterId);
-  if (screen === "settings") return renderSettings();
-  if (screen === "journal") return renderJournal();
-  return renderHome();
+  if (screen === "settings") {
+    renderSettings();
+  } else if (screen === "journal") {
+    renderJournal();
+  } else {
+    renderHome();
+  }
+
+  setTimeout(runStartupChecks, 300);
 }
 
 function renderHeader(title, subtitle, action = "") {
@@ -1317,8 +2145,14 @@ function openSizeDialog() {
 
 
 function renderSettings() {
+  screen = "settings";
+  helpArticle = null;
+
+  const backupStatus = hasUnbackedChanges() ? "Backup recommended" : "Up to date";
+
   app.innerHTML = `
-    ${renderHeader("Settings", "Privacy, backup and app preferences.")}
+    ${renderHeader("Settings", "Privacy, appearance, backups and support.")}
+
     <div class="section-title"><span>General</span></div>
     <div class="settings-row"><span>Language</span><span>English</span></div>
     <button class="settings-row" onclick="openThemeDialog()"><span>Theme</span><span>${themeLabel(state.settings.theme)}</span></button>
@@ -1331,7 +2165,7 @@ function renderSettings() {
       <button class="settings-row" onclick="changePin()"><span>Change PIN</span><span>PIN</span></button>
       <button class="settings-row danger" onclick="disablePin()"><span>Disable PIN</span><span>Off</span></button>
     ` : `
-      <button class="settings-row" onclick="setPin()"><span>Set PIN Code</span><span>4-12 digits</span></button>
+      <button class="settings-row" onclick="setPin()"><span>Set PIN Code</span><span>4–12 digits</span></button>
     `}
     <div class="settings-row"><span>Face ID</span><span>Coming later</span></div>
 
@@ -1339,17 +2173,27 @@ function renderSettings() {
     <button class="settings-row" onclick="importFile.click()"><span>Import JSON</span><span>Choose file</span></button>
     <button class="settings-row" onclick="exportJson(state)"><span>Export Backup</span><span>JSON</span></button>
     <button class="settings-row" onclick="exportCsv(state.counters)"><span>Export CSV</span><span>Spreadsheet</span></button>
+    <div class="settings-row"><span>Backup Status</span><span>${backupStatus}</span></div>
+    <div class="settings-row"><span>Last Backup</span><span>${formatFriendlyDate(state.settings.lastBackupAt)}</span></div>
+
+    <div class="section-title"><span>Help & Support</span></div>
+    <button class="settings-row" onclick="renderHelpCenter()"><span>Help & Tips</span><span>Open</span></button>
+    <button class="settings-row" onclick="renderHelpArticle('whatsNew')"><span>What’s New</span><span>v${TJ_VERSION}</span></button>
+    <button class="settings-row" onclick="renderHelpArticle('roadmap')"><span>Roadmap</span><span>View</span></button>
+    <button class="settings-row" onclick="renderHelpArticle('feedback')"><span>Feedback & Contact</span><span>Email</span></button>
+    <button class="settings-row" onclick="renderHelpArticle('support')"><span>Support Development</span><span>Coming soon</span></button>
 
     <div class="section-title"><span>Maintenance</span></div>
     <button class="settings-row" onclick="updateAppCache()"><span>Update App Cache</span><span>Refresh</span></button>
 
     <div class="section-title"><span>About</span></div>
-    <div class="settings-row"><span>Version</span><span>2.2.1</span></div>
-    <div class="settings-row"><span>Release</span><span>Compact Overscroll Fix</span></div>
-    <div class="settings-row"><span>Build</span><span>20260710-0010</span></div>
+    <div class="settings-row"><span>Version</span><span>${TJ_VERSION}</span></div>
+    <div class="settings-row"><span>Release</span><span>${TJ_RELEASE}</span></div>
+    <div class="settings-row"><span>Build</span><span>${TJ_BUILD}</span></div>
+    <div class="settings-row"><span>Status</span><span>Active Development</span></div>
+    <div class="settings-row"><span>Contact</span><span>${TJ_CONTACT_EMAIL}</span></div>
   `;
 }
-
 function getCounter(id) {
   return state.counters.find(c => c.id === id);
 }

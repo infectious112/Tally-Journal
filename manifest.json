@@ -5,7 +5,7 @@
   "display": "standalone",
   "background_color": "#0b0d12",
   "theme_color": "#0b0d12",
-  "description": "Private counter journal with themes, interface size and compact overscroll fix.",
+  "description": "A private, ADHD-inspired counter journal with context, themes, PIN protection, Help & Tips and local backups.",
   "icons": [
     {
       "src": "icon.svg",
