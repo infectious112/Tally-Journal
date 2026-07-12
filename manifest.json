@@ -1,11 +1,11 @@
 {
   "name": "Tally Journal",
-  "short_name": "TallyJournal",
+  "short_name": "Tally",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0b0d12",
   "theme_color": "#0b0d12",
-  "description": "A private, ADHD-inspired counter journal with context, themes, PIN protection, Help & Tips and local backups.",
+  "description": "Tally Journal",
   "icons": [
     {
       "src": "icon.svg",
