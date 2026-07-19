@@ -1,11 +1,11 @@
 {
-  "name": "Tally Journal",
-  "short_name": "Tally",
+  "name": "Pace Within",
+  "short_name": "Pace Within",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#0b0d12",
   "theme_color": "#0b0d12",
-  "description": "Tally Journal stable release.",
+  "description": "Track moments, understand patterns and take the next step at your own pace.",
   "icons": [
     {
       "src": "icon.svg",
